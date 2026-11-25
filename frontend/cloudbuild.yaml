@@ -1,0 +1,13 @@
+# NEXT_PUBLIC_API_URL はビルド時にクライアントのJSへ埋め込まれるため、
+# docker build の --build-arg で渡す必要があります。
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_IMAGE}
+      - --build-arg
+      - NEXT_PUBLIC_API_URL=${_API_URL}
+      - .
+images:
+  - ${_IMAGE}
